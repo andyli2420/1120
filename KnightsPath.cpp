@@ -149,19 +149,29 @@ int main(){
         cin >> charCol >> row;
 
         if(charCol > 'F' || charCol < 'A'){
-            cout << "Invalid move. Try again!\n"; 
+
+            cout << "Char bug!!!"<< "Invalid move. Try again!\n"; 
         }
         col = charCol - 65;
         row -=1;
 
-        
+        if(Knight.isValid(row, col)){
+
+            Knight.move(row, col);
+            Knight.print();
+
+        }
+        else{
+            cout << "Invalid move. Try again!\n";
+        }
+
         
     } while (Knight.hasMoreMoves());
 
     
     cout << "Finished! No more moves!\n";
-    if(Knight.getSteps >= 18){
-        cout << "Well done!"
+    if(Knight.getSteps() >= 18){
+        cout << "Well done!";
     }
     else{
         cout << "Still drunk? Walk wiser!";
