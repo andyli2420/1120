@@ -14,6 +14,8 @@ private:
 public:
     const static int N = 6;
     KnightsPath(int r, int c){
+        currentR = r;
+        currentC = c;
         steps = 0;
         for(int i = 0; i < N; i++ ){
             for(int j = 0; j < N; j++){
@@ -54,7 +56,7 @@ public:
             }
             cout << endl;
         }
-        cout << "Steps: " << getSteps();
+        cout << "Steps: " << getSteps() << endl;
     }
     
     int getSteps () const{
@@ -77,8 +79,9 @@ public:
         }
         
         //check if it's run in 2H1V/1H2V
-        if( !(abs(changeC) == 2 && abs(changeR) == 1) || !(abs(changeC) == 1 && abs(changeR) == 2)){
-            return false;
+        if( (abs(changeC) == 2 && abs(changeR) == 1) || (abs(changeC) == 1 && abs(changeR) == 2)){
+       
+            return true;
         }
 
         int validNum = preR*currentR + preC*currentC;
@@ -89,12 +92,13 @@ public:
         else return true;
     }
 
+    
     bool hasMoreMoves() const{
 
         int possibleR, possibleC;
         int tempR = currentR, tempC = currentC;
 
-       
+        //check 8個方向 ISVALID? ALL NOT return false
         
 
         
@@ -103,7 +107,7 @@ public:
     };
     bool move(int r, int c){
         if(isValid(r, c)){
-
+            steps+=1;
             board[r][c] = steps;
             
             previousC = currentC;
@@ -111,8 +115,6 @@ public:
 
             currentC = c;
             currentR = r;
-
-            steps+=1;
 
             return true;
         }
